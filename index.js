@@ -24,7 +24,9 @@ load();
 
 const logoutUser = () => {
     signOut(auth).then(() => {
-
+        if (currentPage !== "index.html") {
+            location.href = "index.html";
+        }
     }).catch((error) => {
         console.log(error)
     });

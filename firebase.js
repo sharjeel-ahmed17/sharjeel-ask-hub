@@ -1,5 +1,12 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+
+import { getFirestore, doc, setDoc, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+
+
+
 const firebaseConfig = {
     apiKey: "AIzaSyB_a-IBjec2YO1YOPXzK5rvpIcrSCoirQM",
     authDomain: "sharjeel-askhubblog.firebaseapp.com",
@@ -15,7 +22,9 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
+const db = getFirestore(app);
+
 export {
-    auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut
+    auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, db, setDoc, doc, collection, addDoc
 }
 

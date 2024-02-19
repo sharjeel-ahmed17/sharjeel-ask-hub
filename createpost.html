@@ -4,28 +4,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Ask Hub BLogs || post page</title>
 </head>
 
 <body>
     <p>create your first post</p>
     <button id="logoutBtn">logout</button>
 
-    <form id="addPost">
-        <div>
-            <input type="text" name="" id="title" placeholder="enter your title">
-        </div>
 
-        <div>
+    <div>
+        <input type="text" name="" id="title" placeholder="enter your title">
+    </div>
 
-            <textarea name="" id="description" cols="30" rows="10" placeholder="enter your description"></textarea>
-        </div>
+    <div>
 
-        <div>
-            <input type="submit" value="save">
-            <input type="reset" value="cancel">
-        </div>
-    </form>
+        <textarea name="" id="content" cols="30" rows="10" placeholder="enter your description"></textarea>
+    </div>
+
+    <div>
+
+        <button id="addPost">save</button>
+        <input type="reset" value="cancel">
+    </div>
+
 
     <script type="module" src="index.js"></script>
     <script type="module" src="createpost.js"></script>
