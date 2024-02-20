@@ -11,23 +11,23 @@
     <p>create your first post</p>
     <button id="logoutBtn">logout</button>
 
+    <form id="addPost">
+        <div>
+            <input type="text" name="" id="title" placeholder="enter your title">
+        </div>
 
-    <div>
-        <input type="text" name="" id="title" placeholder="enter your title">
-    </div>
+        <div>
 
-    <div>
+            <textarea name="" id="content" cols="30" rows="10" placeholder="enter your description"></textarea>
+        </div>
 
-        <textarea name="" id="content" cols="30" rows="10" placeholder="enter your description"></textarea>
-    </div>
+        <div>
 
-    <div>
+            <button type="submit">save</button>
+            <input type="reset" value="cancel">
+        </div>
 
-        <button id="addPost">save</button>
-        <input type="reset" value="cancel">
-    </div>
-
-
+    </form>
     <script type="module" src="index.js"></script>
     <script type="module" src="createpost.js"></script>
 </body>

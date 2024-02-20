@@ -1,12 +1,17 @@
-import { auth, onAuthStateChanged, signOut } from "./firebase.js";
+import { auth, onAuthStateChanged, signOut, collection, query, where, getDocs, onSnapshot, db, signInWithPopup, provider } from "./firebase.js";
 
 let currentPage = window.location.pathname.split('/').pop();
+
+// ** observer start
 const load = () => {
     onAuthStateChanged(auth, (user) => {
         if (user) {
             if (currentPage !== "createpost.html") {
-                location.href = "createpost.html"
+                location.href = "createpost.html";
+
             }
+
+
             const uid = user.uid;
             console.log(uid)
             console.log("user is login")
@@ -20,8 +25,10 @@ const load = () => {
 }
 
 load();
+// ** observer end
 
 
+// ! user logout start
 const logoutUser = () => {
     signOut(auth).then(() => {
         if (currentPage !== "index.html") {
@@ -36,3 +43,59 @@ const logoutBtn = document.getElementById("logoutBtn");
 logoutBtn && logoutBtn.addEventListener("click", () => {
     logoutUser();
 })
+
+// ! user logout end
+
+// ** sign in with google start 
+const googleSIgnIn = () => {
+    signInWithPopup(auth, provider)
+        .then((result) => {
+            const credential = GoogleAuthProvider.credentialFromResult(result);
+            const token = credential.accessToken;
+            const user = result.user;
+            // console.log(user)
+        }).catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            const email = error.customData.email;
+            const credential = GoogleAuthProvider.credentialFromError(error);
+            // console.log(credential)
+        });
+}
+
+
+let googleBtn = document.getElementById("googleBtn");
+googleBtn && googleBtn.addEventListener("click", googleSIgnIn);
+
+// ** sign in with google end
+
+// todo: load blogs starts
+
+
+
+const loadBlog = () => {
+    const blogHead = document.getElementById("postHead");
+    const q = query(collection(db, "posts"),);
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+        const Blogs = querySnapshot.docs.map((docs) => {
+
+
+            let blogEl = docs.data()
+
+
+
+            return `
+     
+                      <h1><a href="./post.html">${blogEl.title}</a></h1>
+                     `
+
+        }).join("");
+
+        blogHead.innerHTML = Blogs;
+
+
+    });
+}
+// loadBlog()
+// todo: load blogs ends
+

@@ -7,6 +7,14 @@ const addData = async () => {
     const title = document.getElementById("title").value;
     const content = document.getElementById("content").value;
 
+
+    // todo:  validation here 
+    if (!title.trim() || !content.trim()) {
+        console.error("title and content can not be blanks");
+        return;
+
+    }
+
     const id = new Date().getTime();
 
 
@@ -26,9 +34,14 @@ const addData = async () => {
 
     document.getElementById("title").value = "";
     document.getElementById("content").value = "";
-    console.log("data is added in the documents")
+    console.log("data is added in the documents");
+
+
 }
 
 
 const addPost = document.getElementById("addPost");
-addPost && addPost.addEventListener("click", addData);
+addPost && addPost.addEventListener("submit", (e) => {
+    e.preventDefault();
+    addData();
+});
