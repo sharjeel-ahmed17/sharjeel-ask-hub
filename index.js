@@ -28,23 +28,7 @@ load();
 // ** observer end
 
 
-// ! user logout start
-const logoutUser = () => {
-    signOut(auth).then(() => {
-        if (currentPage !== "index.html") {
-            location.href = "index.html";
-        }
-    }).catch((error) => {
-        console.log(error)
-    });
-}
 
-const logoutBtn = document.getElementById("logoutBtn");
-logoutBtn && logoutBtn.addEventListener("click", () => {
-    logoutUser();
-})
-
-// ! user logout end
 
 // ** sign in with google start 
 const googleSIgnIn = () => {
@@ -75,6 +59,7 @@ googleBtn && googleBtn.addEventListener("click", googleSIgnIn);
 
 const loadBlog = () => {
     const blogHead = document.getElementById("blogsList");
+    // const blogHead = document.getElementById("postHead");
     const q = query(collection(db, "posts"),);
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
         const Blogs = querySnapshot.docs.map((docs) => {

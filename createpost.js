@@ -1,4 +1,4 @@
-import { db, setDoc, doc } from "./firebase.js";
+import { db, setDoc, doc, auth, signOut } from "./firebase.js";
 
 
 
@@ -45,3 +45,21 @@ addPost && addPost.addEventListener("submit", (e) => {
     e.preventDefault();
     addData();
 });
+  
+// ! user logout start
+const logoutUser = () => {
+    signOut(auth).then(() => {
+        if (currentPage !== "index.html") {
+            location.href = "index.html";
+        }
+    }).catch((error) => {
+        console.log(error)
+    });
+}
+
+const logoutBtn = document.getElementById("logoutBtn");
+logoutBtn && logoutBtn.addEventListener("click", () => {
+    logoutUser();
+})
+
+// ! user logout end
