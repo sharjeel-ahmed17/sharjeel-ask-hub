@@ -74,7 +74,7 @@ googleBtn && googleBtn.addEventListener("click", googleSIgnIn);
 
 
 const loadBlog = () => {
-    const blogHead = document.getElementById("postHead");
+    const blogHead = document.getElementById("blogsList");
     const q = query(collection(db, "posts"),);
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
         const Blogs = querySnapshot.docs.map((docs) => {
@@ -86,7 +86,7 @@ const loadBlog = () => {
 
             return `
      
-                      <h1><a href="./post.html">${blogEl.title}</a></h1>
+                      <h1 style="color: purple; background: green;">${blogEl.title}</h1>
                      `
 
         }).join("");
@@ -96,6 +96,6 @@ const loadBlog = () => {
 
     });
 }
-// loadBlog()
+loadBlog()
 // todo: load blogs ends
 
