@@ -1,4 +1,4 @@
-import { db, doc , getDoc} from "./firebase.js"
+import { db, doc, getDoc } from "./firebase.js"
 
 const urlParams = new URLSearchParams(window.location.search);
 
@@ -31,4 +31,27 @@ const loadPost = () => {
 };
 
 loadPost();
+
+// todo comment function is here : 
+
+
+const commentingFunction = () => {
+
+    let comment = document.getElementById("comment");
+    let addcommentBtn = document.getElementById("addComment");
+    let commentInput = document.getElementById("commentInput");
+
+
+    const addComment = () => {
+        let commentHtml = `<li>${commentInput.value}</li>`;
+        comment.innerHTML += commentHtml;
+        document.getElementById("commentInput").value = "";
+    }
+
+    addcommentBtn && addcommentBtn.addEventListener("click", () => {
+        addComment();
+    });
+}
+
+commentingFunction();
 
