@@ -9,40 +9,65 @@
 </head>
 
 <body>
+    <!-- header start -->
 
-    <header class="py-4 px-6 bg-green-400">
-        <p>header</p>
+    <header class=" px-6 bg-green-400">
 
+        <div
+            class="max-w-[1200px] mx-auto flex flex-col md:flex-row justify-between items-center p-4 md:gap-0 gap-5 mb-5">
+            <div class="">
+                <img src="./images/logo2.png" alt="" class="rounded-full w-20">
+            </div>
+            <div class="w-full md:w-1/2">
+                <form action="" class="relative ">
+                    <input type="search" placeholder="search here" class="w-full py-3 px-4 rounded-xl" />
+                    <i class="fa-solid fa-magnifying-glass absolute top-5 right-5"></i>
+                </form>
+            </div>
+            <div class="capitalize space-x-5">
+                <button class="btn btn-xs sm:btn-sm md:btn-md btn-outline btn-success">write or ask</button>
+                <button class="btn btn-xs sm:btn-sm md:btn-md btn-outline btn-success">login</button>
+            </div>
+
+
+        </div>
     </header>
-    <form id="loginForm">
-        <div>
-            <label for="email">email</label>
-            <input type="email" name="" id="email" autocomplete="off">
-        </div>
-        <div>
-            <label for="password">password</label>
-            <input type="password" name="" id="password" autocomplete="off">
-        </div>
-        <div>
+    <!-- header end -->
+    <div class="fixed top-[50%] left-[50%] translate-x-[-50%]  translate-y-[-50%]">
+        <div class="bg-[rgba(0,0,0,0.5)] shadow-lg rounded-md p-10 ">
+            <form id="loginForm">
+                <div class="mb-5 flex flex-col gap-3">
+                    <label for="email" class="w-full capitalize font-medium text-2xl">email</label>
+                    <input type="email" name="" id="email" autocomplete="off" class="w-full">
+                </div>
+                <div class="mb-5">
+                    <label for="password">password</label>
+                    <input type="password" name="" id="password" autocomplete="off">
+                </div>
+                <div class="mb-5">
 
-            <input type="submit" name="" value="login">
+                    <input type="submit" name="" value="login">
+                </div>
+                <div class="mb-5">
+
+                    <p>don't have an account <a href="./signup.html
+                    ">signup here</a></p>
+                </div>
+            </form>
+
+            <button id="googleBtn">sign in with google</button>
         </div>
-        <div>
 
-            <p>don't have an account <a href="./signup.html
-            ">signup here</a></p>
-        </div>
-    </form>
+    </div>
 
-    <button id="googleBtn">sign in with google</button>
 
-    <footer>
-        footer
+    <footer class="fixed bottom-0 px-5 w-full bg-green-800">
+        <p class="text-center p-5">all right reversed by ask hub blog &copy;</p>
     </footer>
-    <!-- 
+
     <script type="module" src="./firebase.js"></script>
     <script type="module" src="./login.js"></script>
-    <script type="module" src="./index.js"></script> -->
+    <script type="module" src="./index.js"></script>
 </body>
 
 </html>

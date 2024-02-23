@@ -6,6 +6,7 @@ const postId = urlParams.get('id');
 
 const loadPost = () => {
     const postContent = document.getElementById("postContent");
+    const docTitle = document.getElementById("docTitle");
 
     if (postContent) {
 
@@ -19,6 +20,9 @@ const loadPost = () => {
                     <h1>${postData.title}</h1>
                     <p>${postData.content}</p>
                 `;
+
+
+                docTitle.innerHTML = `${postData.title}`;
             } else {
                 console.error("No such document!");
             }
@@ -28,6 +32,8 @@ const loadPost = () => {
     } else {
         console.error("Element with ID 'postContent' not found.");
     }
+
+
 };
 
 loadPost();
