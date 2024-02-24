@@ -1,4 +1,4 @@
-import { db, doc, getDoc, setDoc, query, collection, onSnapshot } from "./firebase.js"
+import { db, doc, getDoc, setDoc, query, collection, onSnapshot, where } from "./firebase.js"
 
 const urlParams = new URLSearchParams(window.location.search);
 
@@ -55,7 +55,7 @@ const addCommets = async () => {
     const inputVal = todoInput.value;
 
     if (!inputVal.trim()) {
-        alert("enter a todo items");
+        alert("enter a comments please");
     }
 
 
@@ -78,7 +78,7 @@ addCommentBtn && addCommentBtn.addEventListener("click", addCommets);
 const getCommets = async () => {
     console.log("abd");
     let item = "";
-    const q = query(collection(db, "comments"));
+    const q = query(collection(db, "comments"), where("posts", "==", postId));
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
         const cities = [];
         querySnapshot.forEach((doc) => {
