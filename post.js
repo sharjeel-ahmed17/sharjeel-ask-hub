@@ -1,4 +1,4 @@
-import { db, doc, getDoc } from "./firebase.js"
+import { db, doc, getDoc, setDoc, query, collection, onSnapshot } from "./firebase.js"
 
 const urlParams = new URLSearchParams(window.location.search);
 
@@ -41,23 +41,71 @@ loadPost();
 // todo comment function is here : 
 
 
-const commentingFunction = () => {
-
-    let comment = document.getElementById("comment");
-    let addcommentBtn = document.getElementById("addComment");
-    let commentInput = document.getElementById("commentInput");
 
 
-    const addComment = () => {
-        let commentHtml = `<li>${commentInput.value}</li>`;
-        comment.innerHTML += commentHtml;
-        document.getElementById("commentInput").value = "";
+
+
+// ! commet fun goes here working fine
+
+let commentsList = document.getElementById("commentList");
+const addCommets = async () => {
+    const todoInput = document.getElementById("commentInput");
+
+
+    const inputVal = todoInput.value;
+
+    if (!inputVal.trim()) {
+        alert("enter a todo items");
     }
 
-    addcommentBtn && addcommentBtn.addEventListener("click", () => {
-        addComment();
-    });
-}
 
-commentingFunction();
+    const id = new Date().getTime();
+
+    const payload = {
+        id,
+        todo: inputVal,
+        timestamp: id,
+    };
+
+    await setDoc(doc(db, "comments", `${id}`), payload);
+    todoInput.value = "";
+};
+
+let addCommentBtn = document.getElementById("addCommentBtn");
+addCommentBtn && addCommentBtn.addEventListener("click", addCommets);
+
+
+const getCommets = async () => {
+    console.log("abd");
+    let item = "";
+    const q = query(collection(db, "comments"));
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+        const cities = [];
+        querySnapshot.forEach((doc) => {
+            cities.push(doc.data());
+        });
+        console.log(cities);
+        item = cities.map((todoObj) => `<li>${todoObj.todo}</li>`).join("");
+        commentsList.innerHTML = item;
+    });
+};
+
+getCommets();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

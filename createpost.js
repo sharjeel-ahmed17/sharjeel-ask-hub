@@ -4,10 +4,6 @@ import { db, setDoc, doc, auth, signOut, ref, uploadBytesResumable, getDownloadU
 const handleFileUpload = (file) => {
     console.log("Selected file:", file);
 };
-
-
-
-
 const uploadImage = () => {
 
     const fileInput = document.getElementById("fileInput");
@@ -76,12 +72,10 @@ const uploadImage = () => {
         }
     );
 }
-
-
-let uploadImgBtn = document.getElementById("uploadImgBtn");
-uploadImgBtn && uploadImgBtn.addEventListener("click", () => {
-    uploadImage();
-})
+// let uploadImgBtn = document.getElementById("uploadImgBtn");
+// uploadImgBtn && uploadImgBtn.addEventListener("click", () => {
+//     uploadImage();
+// })
 // ** upload image into firebase end
 
 //  ?? add data into firebase
@@ -89,14 +83,37 @@ uploadImgBtn && uploadImgBtn.addEventListener("click", () => {
 const addData = async () => {
     const title = document.getElementById("title").value;
     const content = document.getElementById("content").value;
+    // const status = document.querySelector('input[name="status"]:checked').value;
 
+    const statusElement = document.querySelector('input[name="status"]:checked');
+    const status = statusElement ? statusElement.value : null;
+
+    const typeElement = document.querySelector('input[name="type"]:checked');
+    const type = typeElement ? typeElement.value : null;
+    // const type = document.querySelector('input[name="type"]:checked').value;
+    const catagory = document.getElementById("catagory").value;
+
+
+    // let imageUrl;
+    // try {
+    //     imageUrl = await uploadImage();
+    // } catch (error) {
+    //     console.error("Error uploading image:", error);
+    //     return; // Exit function if image upload fails
+    // }
+
+
+    console.log("status  = ", status, "type = ", type, "catagory = ", catagory);
 
     // todo:  validation here 
-    if (!title.trim() || !content.trim()) {
-        console.error("title and content can not be blanks");
+    if (!title.trim() || !catagory.trim() || type === "" || !status || !content.trim()) {
+        alert("Please fill out all fields.");
         return;
-
     }
+
+
+
+
 
     const id = new Date().getTime();
 
@@ -104,7 +121,12 @@ const addData = async () => {
     const payload = {
         id,
         title,
-        content
+        content,
+        status,
+        type,
+        catagory,
+        // imageUrl,
+        userName: auth.currentUser.displayName
     }
 
     try {
@@ -132,6 +154,24 @@ addPost && addPost.addEventListener("submit", (e) => {
 
 
 // ?? add data into firebase end
+
+// todo image preview start
+document.getElementById('fileInput').addEventListener('change', function (event) {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+
+    reader.onload = function (e) {
+        const img = document.createElement('img');
+        img.src = e.target.result;
+        img.classList.add('preview-image');
+        document.getElementById('imagePreview').innerHTML = '';
+        document.getElementById('imagePreview').appendChild(img);
+    };
+
+    reader.readAsDataURL(file);
+});
+
+// todo image preview end
 
 
 // ! user logout start
