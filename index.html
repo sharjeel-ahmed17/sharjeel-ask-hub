@@ -5,30 +5,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-site-verification" content="zyW-xARHz0ObiMDRCQDkxhB6jh_4qeyzVHUQ-yfcM6g" />
-    <title></title>
+    <title>ask hub blogs || Home page</title>
+    <link rel="stylesheet" href="./src/output.css">
 </head>
 
 <body>
-    <header>
-        <div>
-            <div>ask hub blogs</div>
-            <div><input type="search" name="" id="" placeholder="serach here"></div>
-            <div>
-                <button><a href="./createpost.html">write</a> </button>
-                <button><a href="./login.html">login</a> </button>
+    <header class=" px-6 bg-green-400">
+
+        <div
+            class="max-w-[1200px] mx-auto flex flex-col md:flex-row justify-between items-center p-4 md:gap-0 gap-5 mb-5">
+            <div class="">
+                <img src="./images/logo2.png" alt="" class="rounded-full w-20">
             </div>
+            <div class="w-full md:w-1/2">
+                <form action="" class="relative ">
+                    <input type="search" placeholder="search here" class="w-full py-3 px-4 rounded-xl" />
+                    <i class="fa-solid fa-magnifying-glass absolute top-5 right-5"></i>
+                </form>
+            </div>
+            <div class="capitalize space-x-5">
+                <button class="btn btn-xs sm:btn-sm md:btn-md btn-outline btn-success"><a
+                        href="./createpost.html">write</a> </button>
+                <button class="btn btn-xs sm:btn-sm md:btn-md btn-outline btn-success"><a href="./login.html">login</a>
+                </button>
+
+            </div>
+
+
         </div>
     </header>
-    <h1>all post</h1>
 
-    <div class="hero-section" id="postHead">
+
+    <h1 class="px-6 py-2 text-4xl capitalize">all post</h1>
+
+    <div class="hero-section px-6 py-12" id="postHead">
 
     </div>
 
 
-    <footer>
-        <p>all right reversed by sharjeel ahmed</p>
+    <footer class="fixed bottom-0 px-5 py-4 w-full bg-green-800 ">
+        <p class="text-center p-5 font-bold capitalize text-white">all right reversed by ask hub blog &copy;</p>
     </footer>
+
 
     <script type="module" src="./firebase.js"></script>
     <script type="module" src="./index.js"></script>

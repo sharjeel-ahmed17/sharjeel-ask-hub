@@ -17,8 +17,8 @@ const loadPost = () => {
                 const postData = doc.data();
 
                 postContent.innerHTML = `
-                    <h1>${postData.title}</h1>
-                    <p>${postData.content}</p>
+                <h2 class="text-2xl font-bold mb-2">${postData.title}</h2>
+                <p class="text-gray-700">${postData.content}</p>
                 `;
 
 
@@ -78,7 +78,7 @@ addCommentBtn && addCommentBtn.addEventListener("click", addCommets);
 const getCommets = async () => {
     console.log("abd");
     let item = "";
-    const q = query(collection(db, "comments"), where("posts", "==", postId));
+    const q = query(collection(db, "comments"));
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
         const cities = [];
         querySnapshot.forEach((doc) => {

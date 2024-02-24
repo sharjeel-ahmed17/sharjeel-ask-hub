@@ -5,43 +5,67 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>sign up</title>
+    <link rel="stylesheet" href="./src/output.css">
 </head>
 
 <body>
 
-    <header>
-        <p>header</p>
+    <header class=" px-6 bg-green-400">
+
+        <div
+            class="max-w-[1200px] mx-auto flex flex-col md:flex-row justify-between items-center p-4 md:gap-0 gap-5 mb-5">
+            <div class="">
+                <img src="./images/logo2.png" alt="" class="rounded-full w-20">
+            </div>
+            <div class="w-full md:w-1/2">
+                <form action="" class="relative ">
+                    <input type="search" placeholder="search here" class="w-full py-3 px-4 rounded-xl" />
+                    <i class="fa-solid fa-magnifying-glass absolute top-5 right-5"></i>
+                </form>
+            </div>
+            <div class="capitalize space-x-5">
+                <button class="btn btn-xs sm:btn-sm md:btn-md btn-outline btn-success"><a
+                        href="./createpost.html">write</a> </button>
+                <button class="btn btn-xs sm:btn-sm md:btn-md btn-outline btn-success"><a href="./login.html">login</a>
+                </button>
+
+            </div>
+
+
+        </div>
     </header>
-    <form id="signupForm">
-        <div>
-            <label for="email">first Name </label>
-            <input type="text" name="" id="firstName" autocomplete="off">
+    <form id="signupForm" class="max-w-md mx-auto my-8 bg-white p-6 rounded-md shadow-md">
+        <div class="mb-4">
+            <label for="firstName" class="block text-sm font-medium text-gray-700">First Name</label>
+            <input type="text" name="firstName" id="firstName" autocomplete="off"
+                class="mt-1 px-4 py-2 border rounded-md w-full focus:outline-none focus:ring focus:border-blue-500">
         </div>
-        <div>
-            <label for="email">Last Name</label>
-            <input type="text" name="" id="lastName" autocomplete="off">
+        <div class="mb-4">
+            <label for="lastName" class="block text-sm font-medium text-gray-700">Last Name</label>
+            <input type="text" name="lastName" id="lastName" autocomplete="off"
+                class="mt-1 px-4 py-2 border rounded-md w-full focus:outline-none focus:ring focus:border-blue-500">
         </div>
-        <div>
-            <label for="email">email</label>
-            <input type="email" name="" id="email" autocomplete="off">
+        <div class="mb-4">
+            <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+            <input type="email" name="email" id="email" autocomplete="off"
+                class="mt-1 px-4 py-2 border rounded-md w-full focus:outline-none focus:ring focus:border-blue-500">
         </div>
-        <div>
-            <label for="password">password</label>
-            <input type="password" name="" id="password" autocomplete="off">
+        <div class="mb-4">
+            <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+            <input type="password" name="password" id="password" autocomplete="off"
+                class="mt-1 px-4 py-2 border rounded-md w-full focus:outline-none focus:ring focus:border-blue-500">
         </div>
-        <div>
-
-            <input type="submit" name="" value="sign up">
+        <div class="mb-4">
+            <input type="submit" value="Sign Up"
+                class="w-full px-4 py-2 bg-blue-500 text-white rounded-md cursor-pointer hover:bg-blue-600 transition duration-300">
         </div>
-        <div>
-
-            <p>already have an account <a href="./login.html
-            ">login here</a></p>
+        <div class="text-center text-sm text-gray-600">
+            <p>Already have an account? <a href="./login.html" class="text-blue-500 hover:underline">Login here</a></p>
         </div>
     </form>
 
-    <footer>
-        footer
+    <footer class="fixed bottom-0 px-5 py-4 w-full bg-green-800 ">
+        <p class="text-center p-5 font-bold capitalize text-white">all right reversed by ask hub blog &copy;</p>
     </footer>
     <!-- script files goes here -->
     <script type="module" src="./firebase.js"></script>
