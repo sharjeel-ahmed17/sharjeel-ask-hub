@@ -17,8 +17,14 @@ const loadPost = () => {
                 const postData = doc.data();
 
                 postContent.innerHTML = `
-                <h2 class="text-2xl font-bold mb-2">${postData.title}</h2>
-                <p class="text-gray-700">${postData.content}</p>
+                <h2 class="text-2xl font-bold mb-2">post title: ${postData.title}</h2>
+                <p class="text-gray-700">post content: ${postData.content}</p>
+                <p>${postData.type}</p>
+                <p>${postData.id}</p>
+                <p>${postData.status}</p>
+                <p>${postData.catagory}</p>
+                <p>${postData.userName}</p>
+                <img src=${postData.downloadURL} width='200'/>
                 `;
 
 

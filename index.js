@@ -72,6 +72,7 @@ const loadBlog = () => {
                         ${blogData.title}
                     </h2>
                     <p class="text-gray-700">${blogData.content}</p>
+                    <img class="text-gray-500" src=${blogData.downloadURL} />
                 `;
             });
 

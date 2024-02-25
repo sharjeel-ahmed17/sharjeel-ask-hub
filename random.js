@@ -303,3 +303,218 @@ document.addEventListener("DOMContentLoaded", function () {
 // loadBlog();
 
 // ** working fine but not uisng backtics
+
+
+// Import necessary Firebase modules for app initialization, Firestore database, authentication, and storage
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+import { getFirestore, doc, setDoc, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+import { onAuthStateChanged, getAuth, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+import { getStorage, ref, uploadBytesResumable } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js";
+
+// Firebase configuration containing API keys and project details
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_AUTH_DOMAIN",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_STORAGE_BUCKET",
+  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+  appId: "YOUR_APP_ID",
+  measurementId: "YOUR_MEASUREMENT_ID"
+};
+
+// Initialize Firebase app with the provided configuration
+const app = initializeApp(firebaseConfig);
+
+// Get references to Firestore database, authentication, and storage
+const db = getFirestore(app);
+const auth = getAuth();
+const storage = getStorage(app);
+
+// Function to handle blog post addition
+const addBlogPost = async () => {
+  // Disable the "Add Blog" button to prevent multiple submissions
+  addBlog.disabled = true;
+
+  // Get input values from form elements
+  const checkedRadio = document.querySelector('input[name="radio-10"]:checked');
+  const checkedRadio2 = document.querySelector('input[name="radio-1"]:checked');
+  const blogTitle = document.getElementById("blogInp").value.trim();
+  const selectCategory = document.getElementById("selectInp").value.trim();
+  const textArea = document.getElementById("txtArea").value.trim();
+  const img = document.getElementById("img");
+
+  // Check for empty fields
+  const emptyFields = [];
+  if (!checkedRadio) emptyFields.push("Radio Option 1");
+  if (!checkedRadio2) emptyFields.push("Radio Option 2");
+  if (!blogTitle) emptyFields.push("Blog Title");
+  if (selectCategory === "Select Category") emptyFields.push("Select Option");
+  if (!textArea) emptyFields.push("Text Area");
+  if (!img.value) emptyFields.push("Image");
+
+  // Display error message if any field is empty
+  if (emptyFields.length > 0) {
+    const message = `Please fill in the following fields: ${emptyFields.join(", ")}`;
+    Toastify({
+      text: message,
+      duration: 3000,
+      gravity: "top",
+      close: true
+    }).showToast();
+    addBlog.disabled = false;
+    return;
+  }
+
+  // Upload image to Firebase Storage
+  const uploadImage = async () => {
+    const file = img.files[0];
+    const metadata = { contentType: file.type, name: file.name, size: file.size };
+    const storageRef = ref(storage, `images/${file.name}_${Date.now()}`);
+    const uploadTask = uploadBytesResumable(storageRef, file, metadata);
+
+    // Monitor upload progress and handle completion
+    uploadTask.on('state_changed', (snapshot) => {
+      // Handle upload progress
+    }, (error) => {
+      // Handle errors
+    }, async () => {
+      // Get download URL after successful upload
+      const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+
+      // Get current user details
+      const user = auth.currentUser;
+
+      // Create payload for blog post
+      const payload = {
+        userName: user.displayName,
+        id: user.uid,
+        postDate: new Date().toString().slice(4, 15),
+        checkedRadio: checkedRadio.value,
+        checkedRadio2: checkedRadio2.value,
+        blogTitle,
+        selectCategory,
+        textArea,
+        downloadURL
+      };
+
+      try {
+        // Upload post data to Firestore
+        await setDoc(doc(db, "posts", `${Date.now()}`), payload);
+        // Clear form fields after successful submission
+        document.getElementById("blogInp").value = "";
+        document.getElementById("selectInp").value = "";
+        document.getElementById("txtArea").value = "";
+        document.querySelectorAll('input[name="radio-10"]').forEach(radio => radio.checked = false);
+        document.querySelectorAll('input[name="radio-1"]').forEach(radio => radio.checked = false);
+        document.getElementById("img").value = "";
+
+        // Show success message
+        Toastify({
+          text: "Post uploaded",
+          duration: 3000,
+          gravity: "center",
+          close: true,
+        }).showToast();
+        // Enable "Add Blog" button for next submission
+        addBlog.disabled = false;
+      } catch (e) {
+        console.error("Error adding document: ", e);
+      }
+    });
+  };
+
+  // Start uploading image
+  uploadImage();
+};
+
+// Function to check user authentication status and redirect accordingly
+const load = () => {
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      if (currentPath !== "addBlog.html") {
+        window.location.href = "addBlog.html";
+      }
+    } else {
+      if (currentPath !== "index.html" && currentPath !== "index.html") {
+        window.location.href = "index.html";
+      }
+    }
+  });
+};
+load();
+
+// Function to handle user logout
+const logOutBtn = () => {
+  signOut(auth)
+    .then(() => {
+      console.log("User signed out");
+      window.location.reload();
+      alert("User logged out");
+    })
+    .catch((error) => {
+      console.error("Sign out error:", error);
+    });
+};
+
+// Function to handle redirection to home page
+const homeRed = () => {
+  window.location.href = "index.html";
+};
+
+// Event listeners for logout, home, and add blog buttons
+logOut && logOut.addEventListener("click", logOutBtn);
+home && home.addEventListener("click", homeRed);
+addBlog.addEventListener("click", addBlogPost);
+
+
+async () => {
+    try {
+
+      const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+      console.log("Download URL:", downloadURL);
+      const timestamp = new Date().getTime();
+     const postDate = new Date().toString().slice(4, 15);
+      
+      
+
+      const payload = {
+        userName: user.displayName,
+        id: user.uid,
+        postDate,
+        checkedRadio: checkedRadio.value,
+        checkedRadio2: checkedRadio2.value,
+        blogInp,
+        selectInp,
+        txtArea,
+        downloadURL: downloadURL
+      };
+
+      try {
+        await setDoc(doc(db, "posts", `${timestamp}`), payload);
+        document.getElementById("blogInp").value = "";
+        document.getElementById("selectInp").value = "";
+        document.getElementById("txtArea").value = "";
+        document.querySelectorAll('input[name="radio-10"]').forEach(radio => radio.checked = false);
+        document.querySelectorAll('input[name="radio-1"]').forEach(radio => radio.checked = false);
+        document.getElementById("img").value = "";
+
+        Toastify({
+          text: "Post uploaded",
+          duration: 3000,
+          gravity: "center",
+          close: true,
+        }).showToast();
+        addBlog.disabled = false;
+      } 
+      
+      
+      
+      
+      catch (e) {
+        console.error("Error adding document: ", e);
+      }
+    } catch (error) {
+      console.error("Error getting download URL: ", error);
+    }
+  }
+
