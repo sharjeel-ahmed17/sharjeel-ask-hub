@@ -55,8 +55,6 @@ googleBtn && googleBtn.addEventListener("click", googleSIgnIn);
 
 // todo: load blogs starts
 
-
-
 const loadBlog = () => {
     const blogHead = document.getElementById("postHead");
 
@@ -73,6 +71,8 @@ const loadBlog = () => {
                     </h2>
                     <p class="text-gray-700">${blogData.content}</p>
                     <img class="text-gray-500" src=${blogData.downloadURL} />
+                      
+                       ${auth.currentUser ? `<a href="post.html?id=${doc.id}" id="move">See more</a>` : `<a href="login.html" id="move">See more</a>`}
                 `;
             });
 
@@ -80,14 +80,6 @@ const loadBlog = () => {
 
             blogHead.innerHTML = blogHtml;
 
-            // Add event listener to each blog post title after they are added to the DOM
-            const postTitles = blogHead.querySelectorAll('.blog-post-title');
-            postTitles.forEach(title => {
-                title.addEventListener('click', () => {
-                    const postId = title.getAttribute('data-post-id');
-                    window.location.href = `post.html?id=${postId}`;
-                });
-            });
         });
     } else {
         console.error("Element with ID 'postHead' not found.");
