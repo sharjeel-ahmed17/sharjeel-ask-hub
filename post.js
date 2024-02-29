@@ -21,8 +21,43 @@ const loadPost = () => {
                 const postData = doc.data();
 
                 list = `
+<!-- post start here -->
+ <h1 class="text-5xl">${postData.title}</h1>
+        <p class="mb-3">${postData.content} </p>
+    </div>
+    <div class="px-4 max-w-[1000px] mx-auto">
+        <div class="w-full h-40 bg-green-800 mb-3">
+            <img src=${postData.downloadURL}
+                alt="" class="w-full h-full object-cover">
+        </div>
+       
 
+        <div class="flex justify-between mb-8">
+            <p>published by <span>${postData.userName}</span></p>
+            <p>dated <span>28-jan-2024</span></p>
+        </div>
 
+        <div class="py-5">
+            <div class="flex justify-start space-x-4 font-bold  capitalize">
+            <label class=" " for="forInput">
+            ADD your Thought
+        </label>
+        <label class="" for="forInput">
+            Reply
+        </label>
+
+            </div>
+            <div>
+               
+                    <textarea name="forInput" id="forInput" cols="30" rows="10" class="w-full border border-green-700 mb-3"></textarea>
+                    <button id="sub" value="submit"
+                        class=" btn btn-xs sm:btn-sm md:btn-md capitalize btn-outline btn-success">submit</button>
+             
+            </div>
+
+        </div> 
+<!-- post end here -->
+<!--post 
                 <h2 class="text-2xl font-bold mb-2">post title: ${postData.title}</h2>
                 <p class="text-gray-700">post content: ${postData.content}</p>
                 <p>${postData.type}</p>
@@ -33,12 +68,9 @@ const loadPost = () => {
                 <img src=${postData.downloadURL} width='200'/>
 
 
+            
 
-
-                <!-- commments section goes here -->
                
-                
-
 
 
                 <div class=" w-[90%] mx-auto mt-5 p-2 ">
@@ -59,6 +91,8 @@ const loadPost = () => {
                             Submit
                         </button>
                     </div>
+
+                    -->
                 `;
 
                 const unsubscribeReplies = onSnapshot(postRef, (doc) => {
@@ -78,7 +112,21 @@ const loadPost = () => {
 
                         // Construct the HTML for the reply with updated time
                         replyList += `
+<!--commente start here -->
+ <div class="flex justify-start space-x-3 items-center capitalize mb-5">
+<div>
+    <img src=${reply.photoURL} alt="" class="rounded-full w-20">
+</div>
+<div>
+    <p class="font-semibold">${reply.displayName}</p>
+    <p class="mt-1 text-xs">${timeDiff !== null ? (timeDiff === 0 ? 'Just now' : timeDiff + ' min ago') : ''}</p>
+</div>
 
+</div>
+
+<!--commente end here -->
+
+<!--commnmets
                               <div class="w-[100%] h-[200px] mt-3">
                                   <div class="w-[35%] h-[50%] flex justify-around items-center">
                                       <div class="w-[80px] h-[80px] rounded-full shadow drop-shadow-lg">
@@ -93,7 +141,10 @@ const loadPost = () => {
                                       <p class="mt-3">${reply.userReply}</p>
                                       <p class="mt-2"><i class="fa-regular fa-heart"></i></p>
                                   </div>
-                              </div>`;
+                              </div>
+                              
+                              -->
+                              `;
                     });
                     commentsSection.innerHTML = replyList;
                 }
