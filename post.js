@@ -21,6 +21,8 @@ const loadPost = () => {
                 const postData = doc.data();
 
                 list = `
+
+
                 <h2 class="text-2xl font-bold mb-2">post title: ${postData.title}</h2>
                 <p class="text-gray-700">post content: ${postData.content}</p>
                 <p>${postData.type}</p>
@@ -33,7 +35,11 @@ const loadPost = () => {
 
 
 
-                // ** commments section goes here
+                <!-- commments section goes here -->
+               
+                
+
+
 
                 <div class=" w-[90%] mx-auto mt-5 p-2 ">
                     <p class=" w-[40%] justify-around flex">
@@ -72,6 +78,7 @@ const loadPost = () => {
 
                         // Construct the HTML for the reply with updated time
                         replyList += `
+
                               <div class="w-[100%] h-[200px] mt-3">
                                   <div class="w-[35%] h-[50%] flex justify-around items-center">
                                       <div class="w-[80px] h-[80px] rounded-full shadow drop-shadow-lg">

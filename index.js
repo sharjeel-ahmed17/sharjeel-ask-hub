@@ -64,15 +64,48 @@ const loadBlog = () => {
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
             const blogEls = querySnapshot.docs.map((doc) => {
                 const blogData = doc.data();
-
+                let name = "sharjeel ahmed";
                 return `
-                    <h2 class="blog-post-title text-2xl font-bold mb-2 text-blue-600 hover:underline bg-green-400" data-post-id="${doc.id}">
+
+                <!-- start cards -->
+                <div class="card mb-5 p-4 border border-green-400 shadow-2xl">
+                    <div class="flex flex-col md:flex-row gap-12 items-start">
+                        <div class="order-2 md:order-1 md:h-[12rem] mx-auto">
+                            <div class="flex flex-col justify-between h-full">
+                                <div>
+                                    <h2 class="font-bold">Lorem ipsum dolor sit amet.</h2>
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum amet ad inventore!</p>
+                                    ${auth.currentUser ? `<a href="post.html?id=${doc.id}" id="move">See more</a>` : `<a href="login.html" id="move">See more</a>`}
+                                </div>
+                                <div class="flex justify-between">
+                                    <div class="space-x-3">
+                                        <i class="fa-solid fa-user"></i>
+                                        <span>${blogData.userName}</span>
+                                    </div>
+                                    <div>28 jan 2024</div>
+                                </div>
+                            </div>
+        
+        
+                        </div>
+                        <div class="w-full md:w-1/5 order-1 md:order-2 ml-0">
+                            <img src=${blogData.downloadURL} alt="" class="w-full h-full object-cover">
+                        </div>
+        
+                    </div>
+        
+                </div>
+                <!-- ends cards -->
+<!--
+ <h2 class="blog-post-title text-2xl font-bold mb-2 text-blue-600 hover:underline bg-green-400" data-post-id="${doc.id}">
                         ${blogData.title}
                     </h2>
                     <p class="text-gray-700">${blogData.content}</p>
                     <img class="text-gray-500" src=${blogData.downloadURL} />
                       
                        ${auth.currentUser ? `<a href="post.html?id=${doc.id}" id="move">See more</a>` : `<a href="login.html" id="move">See more</a>`}
+
+                       -->
                 `;
             });
 
